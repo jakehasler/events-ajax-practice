@@ -28,8 +28,16 @@ $(document).ready(function()
 	if(day.length == 1){day = "0" + day;}
 	var nextWeek = "2015-10-20";
 	console.log(month);
-	var myurl = "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + nextWeek + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+	//var myurl = "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + nextWeek + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
   	//var myurl= "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + year + "-" + month + "-" + day + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  	if(category == 99)
+  {
+  	var myurl = "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + nextWeek + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  }
+  else
+  {
+  	 var myurl = "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + nextWeek + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  }
   	console.log(myurl);
     $.ajax({
         url : myurl,
@@ -43,6 +51,7 @@ $(document).ready(function()
             for(var i in data['events'])
             {
 	            var title = data['events'][i]['name']['text'];
+	            var shortTitle = title.substring(0, 30) + "...";
 	            // var startTime = data['current_observation']['temperature_string'];
 	            var logoUrl = data['events'][i]['logo']['url'];
 	            var eventUrl = data['events'][i]['url'];
@@ -50,7 +59,7 @@ $(document).ready(function()
 	            everything += "<div class=\"col-sm-6 col-md-3 \">";
 	            everything += "<div class=\"thumbnail featured-product\">";
 	            everything += "<img src=\"" + logoUrl + "\">";
-	            everything += "<h3>"+ title + "</h3>" ;
+	            everything += "<h3>"+ shortTitle + "</h3>" ;
 	            everything += "<div class=\"input-group\"><a href=\"" + eventUrl + "\"";
 	            everything += "<button class=\"btn btn-primary\" type=\"button\">See More Details</button>";
 	            everything += "</a></div>";
@@ -83,7 +92,14 @@ $('#mybutton').click(function(e) {
 	if(day.length == 1){day = "0" + day;}
 	
 	console.log(month);
-  var myurl= "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region= " + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + year + "-" + month + "-" + day + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  if(category === 99)
+  {
+  	var myurl = "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + year + "-" + month + "-" + day + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  }
+  else
+  {
+  	 var myurl = "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region=" + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + year + "-" + month + "-" + day + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  }
   $.ajax({
 	url : myurl,
     success : function(parsed_json) {
