@@ -23,13 +23,14 @@ h6 {
 .onWhite
 {
 	color: #464646;
+	padding-bottom: 25px;
 
 }
 
 #eventsInput
 {
 	text-align: center;
-	margin: 20px;
+	/*margin: 20px;*/
 }
 
 #eventsInput input

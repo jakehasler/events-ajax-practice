@@ -24,7 +24,7 @@ $(document).ready(function()
         dataType : "jsonp",
         success : function(data) {
             console.log(data);
-            var location = data['location']['city'];
+            var title = data['location']['city'];
               var temp_string = data['current_observation']['temperature_string'];
               var current_weather = data['current_observation']['weather'];
               var everything = "<ul>";
