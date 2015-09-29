@@ -37,8 +37,30 @@ $(document).ready(function()
       }) // end of ajax
 });
 
-
 });
 
-
+$('#mybutton').click(function(e) {
+	e.preventDefault();
+	var city = $('#city').val();
+	var state = $('#state').val();
+	var category = $('#category').val();
+	var todaysDate = new Date(); 
+	var year = todaysDate.getFullYear().toString();
+	var month = (todaysDate.getMonth() + 1).toString();
+	if(month.length == 1){month = "0" + month;}
+	var day = todaysDate.getDate().toString();
+	if(day.length == 1){day = "0" + day;}
+	
+	console.log(month);
+  var myurl= "https://www.eventbriteapi.com/v3/events/search/?venue.city=" + city + "&venue.region= " + state + "&categories=" + category + "&start_date.range_start=" + year + "-" + month + "-" + day + "T01%3A00%3A00Z&start_date.range_end=" + year + "-" + month + "-" + day + "T23%3A59%3A59Z&token=WKHDWF4S3ZPN5R6UKQSC";
+  $.ajax({
+	url : myurl,
+    success : function(parsed_json) {
+      console.log(parsed_json);
+    },
+	error: function(e) {
+		alert(e);
+	}
+  });
+});
 
